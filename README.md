@@ -17,4 +17,4 @@
 飞花令结束：结束比赛  
 
 # 使用截图
-![使用截图](https://github.com/2387744807/Native.Framework.FeiHua/pic.png)
+![使用截图](https://raw.githubusercontent.com/2387744807/Native.Framework.FeiHua/master/pic.png)
