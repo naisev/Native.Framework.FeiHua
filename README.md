@@ -17,4 +17,4 @@
 飞花令结束：结束比赛  
 
 # 使用截图
-![使用截图](https://imgc.cqp.me/forum/202003/20/225238xuiyki66ellww9lp.png)
+![使用截图](https://github.com/2387744807/Native.Framework.FeiHua/pic.png)
