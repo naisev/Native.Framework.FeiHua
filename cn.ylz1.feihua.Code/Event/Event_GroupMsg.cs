@@ -37,6 +37,15 @@ namespace cn.ylz1.feihua.Code.Event
             {
                 e.FromGroup.SendGroupMessage(CallPlay.Menu());
             }
+            else if (e.Message.Text.StartsWith("飞花令退出"))
+            {
+                e.FromGroup.SendGroupMessage(CallPlay.Exit(e.FromQQ.Id));
+            }
+            else
+            {
+                string reply = CallPlay.Reply(e.Message.Text, e.FromQQ.Id);
+                if (reply != string.Empty) { e.FromGroup.SendGroupMessage(reply); }
+            }
         }
     }
 }

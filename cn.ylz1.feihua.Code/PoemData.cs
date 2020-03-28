@@ -15,6 +15,10 @@ namespace cn.ylz1.feihua.Code
         public string Info { get; set; }
         private static PoemData[] pd;
         private static List<string> flag = new List<string>();
+
+        /// <summary>
+        /// 启用插件，将词库读入内存
+        /// </summary>
         public static void Init()
         {
             SQLiteConnection conn = new SQLiteConnection($"data source={Common.CQApi.AppDirectory}\\data.db;");

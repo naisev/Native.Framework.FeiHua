@@ -26,7 +26,7 @@ namespace cn.ylz1.feihua.Code
         public static string Join(long uid)
         {
             //检查是否创建
-            if (ps.Start==false)
+            if (ps.Start == false)
             {
                 return CQApi.CQCode_At(uid) + "飞花令还未创建！回复【飞花令创建】创建一场比赛";
             }
@@ -75,22 +75,24 @@ namespace cn.ylz1.feihua.Code
             }
 
             ps.Flag = PoemData.GetFlag();
-            return $"飞花令开始！\n系统出题，关键字为【{ps.Flag}】\n请回复带有【{ps.Flag}】的诗句！\n回复格式为【飞花令回复 诗句】\n" +
+            return $"飞花令开始！\n系统出题，关键字为【{ps.Flag}】\n请回复带有【{ps.Flag}】的诗句！\n(直接回复诗句即可)\n" +
                 $"现在请{CQApi.CQCode_At(ps.Players[0].Uid)}首先开始回复！\n(PS:如果暂时想不出来，请回复【飞花令跳过】)";
         }
 
-        public static string Reply(string msg,long uid)
+        public static string Reply(string msg, long uid)
         {
             //检查是否创建
             if (ps.Start == false)
             {
-                return CQApi.CQCode_At(uid) + "飞花令还未创建！回复【飞花令创建】创建一场比赛";
+                return string.Empty;
+                //return CQApi.CQCode_At(uid) + "飞花令还未创建！回复【飞花令创建】创建一场比赛";
             }
 
             //检查是否开始
             if (ps.Flag == "")
             {
-                return CQApi.CQCode_At(uid) + "飞花令还未开始！" + CQApi.CQCode_At(uid) + "如果觉得可以开始比赛了，请回复【飞花令开始】开始比赛！";
+                return string.Empty;
+                //return CQApi.CQCode_At(uid) + "飞花令还未开始！" + CQApi.CQCode_At(uid) + "如果觉得可以开始比赛了，请回复【飞花令开始】开始比赛！";
             }
 
             //检查是否参加
@@ -105,7 +107,8 @@ namespace cn.ylz1.feihua.Code
             }
             if (isJoin == false)
             {
-                return CQApi.CQCode_At(uid) + "你未参加本次飞花令比赛！";
+                return string.Empty;
+                //return CQApi.CQCode_At(uid) + "你未参加本次飞花令比赛！";
             }
 
             //检查当前轮玩家
@@ -113,15 +116,17 @@ namespace cn.ylz1.feihua.Code
             if (index >= ps.Players.Count) { index = 0; }
             if (ps.Players[index].Uid != uid)
             {
-                return CQApi.CQCode_At(uid) + "还未轮到你回复！\n现在请" + CQApi.CQCode_At(ps.Players[index].Uid) + "回复";
+                return string.Empty;
+                //return CQApi.CQCode_At(uid) + "还未轮到你回复！\n现在请" + CQApi.CQCode_At(ps.Players[index].Uid) + "回复";
             }
 
             //判断语句是否包含关键字
             msg = msg.Replace(" ", "");
-            string verse = StrongString.GetRight(msg, "飞花令回复");
-            if (verse.Contains(ps.Flag) == false)
+            string verse = msg.StartsWith("飞花令回复") ? StrongString.GetRight(msg, "飞花令回复") : msg;
+            if (verse.Length < 4 || verse.Length > 8 || verse.Contains(ps.Flag) == false)
             {
-                return CQApi.CQCode_At(uid) + $"诗句不包含【{ps.Flag}】！";
+                return string.Empty;
+                //return CQApi.CQCode_At(uid) + $"诗句不包含【{ps.Flag}】！";
             }
 
             //检查语句是否重复;
@@ -155,9 +160,9 @@ namespace cn.ylz1.feihua.Code
 
             int nextIndex = ps.LastPlayerIndex + 1;
             if (nextIndex >= ps.Players.Count) { nextIndex = 0; }
-            return CQApi.CQCode_At(uid) + 
+            return CQApi.CQCode_At(uid) +
                 $"回复成功！\n{CQApi.CQCode_At(uid)}积分+1，当前积分{ps.Players[ps.LastPlayerIndex].Score}\n“{verse}”出自{pd.Info}" +
-                $"\n现在请{CQApi.CQCode_At(ps.Players[nextIndex].Uid)}回复\n回复格式为【飞花令回复 诗句】\n(PS:如果暂时想不出来，请回复【飞花令跳过】)";
+                $"\n现在请{CQApi.CQCode_At(ps.Players[nextIndex].Uid)}回复\n(直接回复诗句即可)\n(PS:如果暂时想不出来，请回复【飞花令跳过】)";
         }
 
         public static string Leap(long uid)
@@ -224,11 +229,11 @@ namespace cn.ylz1.feihua.Code
             }
 
             //结束，统计分数
-            for (int i = 0; i < ps.Players.Count -1 ; i++)
+            for (int i = 0; i < ps.Players.Count - 1; i++)
             {
-                for (int j = 0; j < ps.Players.Count-i-1; j++)
+                for (int j = 0; j < ps.Players.Count - i - 1; j++)
                 {
-                    if (ps.Players[j].Score < ps.Players[j+1].Score)
+                    if (ps.Players[j].Score < ps.Players[j + 1].Score)
                     {
                         Player tmp = ps.Players[j];
                         ps.Players[j] = ps.Players[j + 1];
@@ -250,7 +255,54 @@ namespace cn.ylz1.feihua.Code
         public static string Menu()
         {
             return "——飞花令菜单——\n飞花令创建：创建比赛\n飞花令加入：参加比赛\n飞花令开始：开始比赛\n" +
-                "飞花令回复：回答诗句\n飞花令跳过：跳过本轮\n飞花令结束：结束比赛";
+                "飞花令回复：回答诗句\n飞花令跳过：跳过本轮\n飞花令结束：结束比赛\n飞花令退出：中途退出";
+        }
+
+        public static string Exit(long uid)
+        {
+            //检查是否创建
+            if (ps.Start == false)
+            {
+                return CQApi.CQCode_At(uid) + "飞花令还未创建！回复【飞花令创建】创建一场比赛";
+            }
+
+            //检查是否开始
+            if (ps.Flag == "")
+            {
+                return CQApi.CQCode_At(uid) + "飞花令还未开始！" + CQApi.CQCode_At(uid) + "如果觉得可以开始比赛了，请回复【飞花令开始】开始比赛！";
+            }
+
+            //检查是否参加
+            bool isJoin = false;
+            foreach (var tmp in ps.Players)
+            {
+                if (tmp.Uid == uid)
+                {
+                    isJoin = true;
+                    break;
+                }
+            }
+            if (isJoin == false)
+            {
+                return CQApi.CQCode_At(uid) + "你未参加本次飞花令比赛！";
+            }
+
+            if (ps.LastPlayerIndex != -1)
+            {
+                int index = ps.Players.IndexOf(ps.Players.Where(p => p.Uid == uid).FirstOrDefault());
+                if (index <= ps.LastPlayerIndex)
+                {
+                    ps.LastPlayerIndex--;
+                }
+            }
+            ps.Players.Remove(ps.Players.Where(p => p.Uid == uid).First());
+            if (ps.Players.Count <= 1)
+            {
+                return "由于飞花令当前参赛人数过少，强制结束\n" + End(ps.CreateUid);
+            }
+            int nextIndex = ps.LastPlayerIndex + 1;
+            if (nextIndex >= ps.Players.Count) { nextIndex = 0; }
+            return $"退出飞花令成功！\n现在请{CQApi.CQCode_At(ps.Players[nextIndex].Uid)}回复\n回复格式为【飞花令回复 诗句】\n(PS:如果暂时想不出来，请回复【飞花令跳过】)";
         }
     }
 }
