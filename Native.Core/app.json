@@ -48,6 +48,10 @@
 		}
 	],
 	"menu": [ // 设置菜单（发布前请删除无用菜单，如果无需设置菜单请全部删除）
+		{
+			"name": "飞花令设置",
+			"function": "menuOpenWindow"
+		}
 	],
 	"status": [ // 悬浮窗状态（见 com.example.status 样例）
 		{

@@ -36,21 +36,12 @@ namespace Native.App.Export
 		private static void ResolveBackcall ()	
 		{	
 			/*	
-			 * Name: 设置A	
-			 * Function: _menuA	
+			 * Name: 飞花令设置	
+			 * Function: menuOpenWindow	
 			 */	
-			if (AppData.UnityContainer.IsRegistered<IMenuCall> ("设置A"))	
+			if (AppData.UnityContainer.IsRegistered<IMenuCall> ("飞花令设置"))	
 			{	
-				Menu_menuAHandler += AppData.UnityContainer.Resolve<IMenuCall> ("设置A").MenuCall;	
-			}	
-			
-			/*	
-			 * Name: 设置B	
-			 * Function: _menuB	
-			 */	
-			if (AppData.UnityContainer.IsRegistered<IMenuCall> ("设置B"))	
-			{	
-				Menu_menuBHandler += AppData.UnityContainer.Resolve<IMenuCall> ("设置B").MenuCall;	
+				MenumenuOpenWindowHandler += AppData.UnityContainer.Resolve<IMenuCall> ("飞花令设置").MenuCall;	
 			}	
 			
 		}	
@@ -58,33 +49,17 @@ namespace Native.App.Export
 		
 		#region --导出方法--	
 		/*	
-		 * Name: 设置A	
-		 * Function: _menuA	
+		 * Name: 飞花令设置	
+		 * Function: menuOpenWindow	
 		 */	
-		public static event EventHandler<CQMenuCallEventArgs> Menu_menuAHandler;	
-		[DllExport (ExportName = "_menuA", CallingConvention = CallingConvention.StdCall)]	
-		public static int Menu_menuA ()	
+		public static event EventHandler<CQMenuCallEventArgs> MenumenuOpenWindowHandler;	
+		[DllExport (ExportName = "menuOpenWindow", CallingConvention = CallingConvention.StdCall)]	
+		public static int MenumenuOpenWindow ()	
 		{	
-			if (Menu_menuAHandler != null)	
+			if (MenumenuOpenWindowHandler != null)	
 			{	
-				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "设置A", "_menuA");	
-				Menu_menuAHandler (typeof (CQMenuExport), args);	
-			}	
-			return 0;	
-		}	
-		
-		/*	
-		 * Name: 设置B	
-		 * Function: _menuB	
-		 */	
-		public static event EventHandler<CQMenuCallEventArgs> Menu_menuBHandler;	
-		[DllExport (ExportName = "_menuB", CallingConvention = CallingConvention.StdCall)]	
-		public static int Menu_menuB ()	
-		{	
-			if (Menu_menuBHandler != null)	
-			{	
-				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "设置B", "_menuB");	
-				Menu_menuBHandler (typeof (CQMenuExport), args);	
+				CQMenuCallEventArgs args = new CQMenuCallEventArgs (AppData.CQApi, AppData.CQLog, "飞花令设置", "menuOpenWindow");	
+				MenumenuOpenWindowHandler (typeof (CQMenuExport), args);	
 			}	
 			return 0;	
 		}	

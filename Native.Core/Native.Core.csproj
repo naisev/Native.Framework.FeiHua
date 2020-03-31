@@ -104,6 +104,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Export\CQExport.log">
       <DependentUpon>CQExport.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -130,6 +131,10 @@
     <ProjectReference Include="..\cn.ylz1.feihua.Code\cn.ylz1.feihua.Code.csproj">
       <Project>{6ddeeb50-9b52-4529-8c7a-abdd6f4b5f92}</Project>
       <Name>cn.ylz1.feihua.Code</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\cn.ylz1.feihua.UI\cn.ylz1.feihua.UI.csproj">
+      <Project>{c3a842eb-adce-4fb0-ac15-b7367f13f6bb}</Project>
+      <Name>cn.ylz1.feihua.UI</Name>
     </ProjectReference>
     <ProjectReference Include="..\Native.Sdk\Native.Sdk.csproj">
       <Project>{d7a958b3-79d9-49f8-8bb4-9619bab6ecba}</Project>
@@ -168,6 +173,10 @@ rename "$(TargetDir)$(TargetName)\$(TargetName).dll" "app.dll"
 ) 
 if exist "$(TargetDir)app.json" (
 move "$(TargetDir)app.json" "$(TargetDir)$(TargetName)" 
-)</PostBuildEvent>
+)
+del "D:\code\VS_Tools\Code\酷QAir\dev\cn.ylz1.feihua\app.dll"
+del "D:\code\VS_Tools\Code\酷QAir\dev\cn.ylz1.feihua\app.json"
+move "D:\code\VS_Tools\Code\Native.Framework.FeiHua\Native.Core\bin\x86\Debug\cn.ylz1.feihua\app.json" "D:\code\VS_Tools\Code\酷QAir\dev\cn.ylz1.feihua\app.json"
+move "D:\code\VS_Tools\Code\Native.Framework.FeiHua\Native.Core\bin\x86\Debug\cn.ylz1.feihua\app.dll" "D:\code\VS_Tools\Code\酷QAir\dev\cn.ylz1.feihua\app.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

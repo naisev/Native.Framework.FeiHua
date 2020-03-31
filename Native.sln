@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Native.Core", "Native.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cn.ylz1.feihua.Code", "cn.ylz1.feihua.Code\cn.ylz1.feihua.Code.csproj", "{6DDEEB50-9B52-4529-8C7A-ABDD6F4B5F92}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cn.ylz1.feihua.UI", "cn.ylz1.feihua.UI\cn.ylz1.feihua.UI.csproj", "{C3A842EB-ADCE-4FB0-AC15-B7367F13F6BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,14 @@ Global
 		{6DDEEB50-9B52-4529-8C7A-ABDD6F4B5F92}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6DDEEB50-9B52-4529-8C7A-ABDD6F4B5F92}.Release|x86.ActiveCfg = Release|Any CPU
 		{6DDEEB50-9B52-4529-8C7A-ABDD6F4B5F92}.Release|x86.Build.0 = Release|Any CPU
+		{C3A842EB-ADCE-4FB0-AC15-B7367F13F6BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A842EB-ADCE-4FB0-AC15-B7367F13F6BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A842EB-ADCE-4FB0-AC15-B7367F13F6BB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C3A842EB-ADCE-4FB0-AC15-B7367F13F6BB}.Debug|x86.Build.0 = Debug|Any CPU
+		{C3A842EB-ADCE-4FB0-AC15-B7367F13F6BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A842EB-ADCE-4FB0-AC15-B7367F13F6BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3A842EB-ADCE-4FB0-AC15-B7367F13F6BB}.Release|x86.ActiveCfg = Release|Any CPU
+		{C3A842EB-ADCE-4FB0-AC15-B7367F13F6BB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

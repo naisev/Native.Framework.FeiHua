@@ -1,4 +1,5 @@
 ﻿using cn.ylz1.feihua.Code.Event;
+using cn.ylz1.feihua.UI;
 using Native.Sdk.Cqp.Interface;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace Native.Core
             unityContainer.RegisterType<IAppDisable, Event_CqAppDisable>("应用将被停用");
             //注入群消息回调
             unityContainer.RegisterType<IGroupMessage, Event_GroupMsg>("群消息处理");
-        }
+			//注入菜单回调
+			unityContainer.RegisterType<IMenuCall, Menu_OpenWindow>("飞花令设置");
+		}
 	}
 }
