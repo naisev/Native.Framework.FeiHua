@@ -88,14 +88,24 @@ namespace cn.ylz1.feihua.Code
                 SQLiteCommand sc = new SQLiteCommand();
                 sc.Connection = conn;
                 int count = _set.Tables["Poem"].Rows.Count;
+
+                SQLiteTransaction st = conn.BeginTransaction();
+                string s = "";
+                int n = 0;
+                sc.CommandText = "INSERT INTO Poem VALUES(@PoemKey,@Verse,@Info)";
+                sc.Parameters.Add("PoemKey", DbType.String);
+                sc.Parameters.Add("Verse", DbType.String);
+                sc.Parameters.Add("Info", DbType.String);
                 for (int i = 0; i < count; i++)
                 {
                     info.Info = $"正在导入{i + 1}/{count}\n请勿关闭酷Q或停用插件！";
-                    sc.CommandText = $"INSERT INTO Poem VALUES('{_set.Tables["Poem"].Rows[i].Field<string>("PoemKey")}','" +
-                        $"{_set.Tables["Poem"].Rows[i].Field<string>("Verse")}','" +
-                        $"{_set.Tables["Poem"].Rows[i].Field<string>("Info")}');";
+                    sc.Parameters[0].Value = _set.Tables["Poem"].Rows[i].Field<string>("PoemKey");
+                    sc.Parameters[1].Value = _set.Tables["Poem"].Rows[i].Field<string>("Verse");
+                    sc.Parameters[2].Value = _set.Tables["Poem"].Rows[i].Field<string>("Info");
                     sc.ExecuteNonQuery();
                 }
+                st.Commit();
+                st.Dispose();
                 sc.Dispose();
                 conn.Close();
                 conn.Dispose();
